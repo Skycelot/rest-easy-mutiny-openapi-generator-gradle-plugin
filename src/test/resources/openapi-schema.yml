@@ -1,0 +1,56 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Person storage api
+paths:
+  /person/{id}:
+    summary: Person resource
+    get:
+      summary: Find person by id
+      operationId: findById
+      parameters:
+        - name: id
+          in: path
+          description: identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful person search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        default:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Person:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        lastName:
+          type: string
+        firstName:
+          type: string
+        middleName:
+          type: string
+        dateOfBirth:
+          type: string
+        sex:
+          type: string
+    Error:
+      type: object
+      properties:
+        name:
+          type: string
+        message:
+          type: string
